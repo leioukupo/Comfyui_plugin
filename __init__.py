@@ -35,9 +35,9 @@ if config["autoUpdate"] == True:
 
 
 
-from aimusic.gen_lyrics import gen_lyrics
-from aimusic.gen_lyrics import load_openAI
-from aimusic.gen_lyrics import analyze_lyrics
+from .aimusic.gen_lyrics import gen_lyrics
+from .aimusic.gen_lyrics import load_openAI
+from .aimusic.gen_lyrics import analyze_lyrics
 
 
 NODE_CLASS_MAPPINGS = {
