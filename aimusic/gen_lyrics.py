@@ -743,9 +743,9 @@ class analyze_lyrics:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "lyrics": ("STRING", {"multiline": True, "default": "你好"}),
                 "client": ("CLIENT",),
                 "model": (get_gpt_models(), {"default": "gpt-3.5-turbo"}),
+                "lyrics": ("STRING", {"multiline": True, "default": "你好"}),
             }
         }
     # Define the return type of the node
