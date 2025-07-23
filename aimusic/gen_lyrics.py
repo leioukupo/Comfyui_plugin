@@ -618,6 +618,7 @@ class gen_lyrics:
         }
 
     OUTPUT_NODE = True
+    RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("lyric",)  # 定义该节点返回的是歌词 字符串
     FUNCTION = "gen_lyrics"  # 定义节点的函数名字
     CATEGORY = "aimusic/gen-lyrics"  # 定义节点类别
