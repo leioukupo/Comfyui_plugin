@@ -618,7 +618,7 @@ class gen_lyrics:
         }
 
     OUTPUT_NODE = True
-    RETURN_TYPES = ("prompt",)  # 定义该节点返回的是歌词 字符串
+    RETURN_NAMES = ("lyric",)  # 定义该节点返回的是歌词 字符串
     FUNCTION = "gen_lyrics"  # 定义节点的函数名字
     CATEGORY = "aimusic/gen-lyrics"  # 定义节点类别
     def gen_lyrics(self, client,model, Lyric_theme, Lyric_structure, time_m, time_s):
