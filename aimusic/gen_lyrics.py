@@ -591,8 +591,7 @@ class gen_lyrics:
                 "model": (get_gpt_models(), {"default": "gpt-3.5-turbo"}),
                 "Lyric_theme": ("STRING", {
                     "default": "歌词主题",
-                    "multiline": True, 
-                    "forceInput": True}),
+                    "multiline": True}),
                 "Lyric_structure": (["流行基础结构"] + ["流行带桥段结构", "流行带预副歌结构", "流行双副歌结构", "流行带后副歌结构", 
                             "中国民谣结构","戏曲结构","古琴曲结构","民族融合结构","中国流行结构","蒙古呼麦结构",
                             "经典摇滚结构", "前卫金属结构", "朋克结构", "硬摇滚结构", "摇滚抒情曲结构", "金属核结构", 
@@ -744,9 +743,9 @@ class analyze_lyrics:
     def INPUT_TYPES(cls):
         return {
             "required": {
+                "lyrics": ("STRING", {"multiline": True, "default": "你好"}),
                 "client": ("CLIENT",),
                 "model": (get_gpt_models(), {"default": "gpt-3.5-turbo"}),
-                "lyrics": ("STRING", {"multiline": True, "default": "你好"}),
             }
         }
     # Define the return type of the node
