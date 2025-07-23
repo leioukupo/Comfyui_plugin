@@ -1,0 +1,389 @@
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "revision": 0,
+  "last_node_id": 14,
+  "last_link_id": 19,
+  "nodes": [
+    {
+      "id": 12,
+      "type": "SongGeneration_Sampler",
+      "pos": [
+        1858.9219970703125,
+        131.57241821289062
+      ],
+      "size": [
+        201.78182983398438,
+        26
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "SongGeneration_DICT",
+          "link": 14
+        }
+      ],
+      "outputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [
+            13
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "smthemex/ComfyUI_SongGeneration",
+        "ver": "f5d74a58abfdb350c70f4b433bc2a418c346b190",
+        "Node name for S&R": "SongGeneration_Sampler"
+      }
+    },
+    {
+      "id": 11,
+      "type": "SaveAudio",
+      "pos": [
+        2119.62939453125,
+        127.57505798339844
+      ],
+      "size": [
+        270,
+        112
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 13
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.42",
+        "Node name for S&R": "SaveAudio"
+      },
+      "widgets_values": [
+        "audio/ComfyUI"
+      ]
+    },
+    {
+      "id": 10,
+      "type": "analyze_lyrics",
+      "pos": [
+        874.0426025390625,
+        301.89483642578125
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "client",
+          "type": "CLIENT",
+          "link": 12
+        },
+        {
+          "name": "lyrics",
+          "type": "STRING",
+          "widget": {
+            "name": "lyrics"
+          },
+          "link": 11
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            19
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "leioukupo/Comfyui_plugin",
+        "ver": "1b62e070a9b8b7180f3dd221b7a876e2f2de2fc6",
+        "Node name for S&R": "analyze_lyrics"
+      },
+      "widgets_values": [
+        "gpt-3.5-turbo",
+        "你好"
+      ]
+    },
+    {
+      "id": 8,
+      "type": "load_openAI",
+      "pos": [
+        533.7355346679688,
+        30.818769454956055
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIENT",
+          "type": "CLIENT",
+          "links": [
+            8,
+            12
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "leioukupo/Comfyui_plugin",
+        "ver": "2702c1e48ddfbb50c165b29b61ed3c56aed1c7cd",
+        "Node name for S&R": "load_openAI"
+      },
+      "widgets_values": [
+        "https://openai-cf.realnow.workers.dev/v1",
+        ""
+      ]
+    },
+    {
+      "id": 7,
+      "type": "gen_lyrics",
+      "pos": [
+        903.2048950195312,
+        -2.1822447776794434
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "client",
+          "type": "CLIENT",
+          "link": 8
+        }
+      ],
+      "outputs": [
+        {
+          "name": "lyric",
+          "type": "STRING",
+          "links": [
+            11,
+            18
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "leioukupo/Comfyui_plugin",
+        "ver": "2702c1e48ddfbb50c165b29b61ed3c56aed1c7cd",
+        "Node name for S&R": "gen_lyrics"
+      },
+      "widgets_values": [
+        "gpt-3.5-turbo",
+        "歌词主题",
+        "None",
+        1,
+        30
+      ]
+    },
+    {
+      "id": 14,
+      "type": "SongGeneration_Stage1",
+      "pos": [
+        952.5142822265625,
+        -185.96759033203125
+      ],
+      "size": [
+        296.767578125,
+        106
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "SongGeneration_MODEL",
+          "links": [
+            15
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "smthemex/ComfyUI_SongGeneration",
+        "ver": "f5d74a58abfdb350c70f4b433bc2a418c346b190",
+        "Node name for S&R": "SongGeneration_Stage1"
+      },
+      "widgets_values": [
+        "htdemucs.pth",
+        "Auto",
+        "left blank"
+      ]
+    },
+    {
+      "id": 13,
+      "type": "SongGeneration_Stage2",
+      "pos": [
+        1367.056396484375,
+        37.23917007446289
+      ],
+      "size": [
+        468.1236877441406,
+        388.8970031738281
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "SongGeneration_MODEL",
+          "link": 15
+        },
+        {
+          "name": "lyric",
+          "type": "STRING",
+          "widget": {
+            "name": "lyric"
+          },
+          "link": 18
+        },
+        {
+          "name": "description",
+          "type": "STRING",
+          "widget": {
+            "name": "description"
+          },
+          "link": 19
+        }
+      ],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "SongGeneration_DICT",
+          "links": [
+            14
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "smthemex/ComfyUI_SongGeneration",
+        "ver": "f5d74a58abfdb350c70f4b433bc2a418c346b190",
+        "Node name for S&R": "SongGeneration_Stage2"
+      },
+      "widgets_values": [
+        "",
+        "",
+        1.5,
+        0.9,
+        50,
+        0,
+        false,
+        50
+      ]
+    }
+  ],
+  "links": [
+    [
+      8,
+      8,
+      0,
+      7,
+      0,
+      "CLIENT"
+    ],
+    [
+      11,
+      7,
+      0,
+      10,
+      1,
+      "STRING"
+    ],
+    [
+      12,
+      8,
+      0,
+      10,
+      0,
+      "CLIENT"
+    ],
+    [
+      13,
+      12,
+      0,
+      11,
+      0,
+      "AUDIO"
+    ],
+    [
+      14,
+      13,
+      0,
+      12,
+      0,
+      "SongGeneration_DICT"
+    ],
+    [
+      15,
+      14,
+      0,
+      13,
+      0,
+      "SongGeneration_MODEL"
+    ],
+    [
+      18,
+      7,
+      0,
+      13,
+      1,
+      "STRING"
+    ],
+    [
+      19,
+      10,
+      0,
+      13,
+      2,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7513148009015777,
+      "offset": [
+        143.12925469110075,
+        450.03146778103553
+      ]
+    },
+    "frontendVersion": "1.23.4",
+    "VHS_latentpreview": true,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}
