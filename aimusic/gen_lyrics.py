@@ -544,7 +544,7 @@ def get_gpt_models():
     return openAI_gpt_models  # Return the list of chat models
 def clean_generated_lyrics(raw_lyrics: str) -> str:
     """
-    Format raw lyrics into the specified structure:
+    Format raw lyrics into a single-line string with strict section formatting:
     - Sections separated by ' ; '
     - Each line in vocal sections ends with a period
     - No spaces around periods
@@ -554,7 +554,7 @@ def clean_generated_lyrics(raw_lyrics: str) -> str:
         raw_lyrics: Raw lyrics text with section markers
 
     Returns:
-        Formatted string with strict section formatting
+        A single-line formatted string
     """
     sections = []
     current_section = None
@@ -568,8 +568,15 @@ def clean_generated_lyrics(raw_lyrics: str) -> str:
         # Detect section headers like [verse]
         section_match = re.match(r'^\[([a-z\-]+)\]$', line)
         if section_match:
+            # Save previous section if exists
             if current_section is not None:
-                sections.append((current_section, current_lines))
+                if current_lines:
+                    # 处理每行结尾加句号，且无空格
+                    formatted_lines = [l.rstrip('.') + '.' for l in current_lines]
+                    section_text = ' '.join(formatted_lines)
+                else:
+                    section_text = ''
+                sections.append(f"[{current_section}]{section_text}")
             current_section = section_match.group(1)
             current_lines = []
         elif current_section is not None:
@@ -577,8 +584,16 @@ def clean_generated_lyrics(raw_lyrics: str) -> str:
             cleaned_line = line.replace(' ', '.').replace('，', '.').replace('。', '.').strip('. ')
             if cleaned_line:
                 current_lines.append(cleaned_line)
-    return cleaned_line
-
+    # 处理最后一个段落
+    if current_section is not None:
+        if current_lines:
+            formatted_lines = [l.rstrip('.') + '.' for l in current_lines]
+            section_text = ' '.join(formatted_lines)
+        else:
+            section_text = ''
+        sections.append(f"[{current_section}]{section_text}")
+    # 用 ' ; ' 连接所有段落，返回单行字符串
+    return ' ; '.join(sections)
 
 
 
