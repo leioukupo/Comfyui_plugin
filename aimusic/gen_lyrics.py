@@ -577,6 +577,7 @@ def clean_generated_lyrics(raw_lyrics: str) -> str:
             cleaned_line = line.replace(' ', '.').replace('，', '.').replace('。', '.').strip('. ')
             if cleaned_line:
                 current_lines.append(cleaned_line)
+    return cleaned_line
 
 
 
@@ -732,8 +733,8 @@ class gen_lyrics:
             # Get the answer from the chat completion
             lyrics = completion.choices[0].message.content
             if lyrics:
-                cleaned_lyrics = clean_generated_lyrics(lyrics)
-                return cleaned_lyrics
+                clean_generated_lyrics(lyrics)
+                return lyrics
         except Exception as e:
             print(f"歌词生成失败: {str(e)}")
             return None
