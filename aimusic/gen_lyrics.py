@@ -749,7 +749,7 @@ class gen_lyrics:
             if lyrics:
                 lyrics = clean_generated_lyrics(lyrics)
                 print(lyrics)
-                return lyrics
+                return (lyrics,)
         except Exception as e:
             print(f"歌词生成失败: {str(e)}")
             return None
@@ -878,7 +878,7 @@ class analyze_lyrics:
         result = ", ".join([analysis["emotion"], analysis["genre"], analysis["instrumentation"], analysis["timbre"],
                    analysis["gender_suggestion"]])
         print(result)
-        return result
+        return (result,)
 
 
 
