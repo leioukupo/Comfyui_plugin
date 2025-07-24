@@ -748,6 +748,7 @@ class gen_lyrics:
             lyrics = completion.choices[0].message.content
             if lyrics:
                 lyrics = clean_generated_lyrics(lyrics)
+                print(lyrics)
                 return lyrics
         except Exception as e:
             print(f"歌词生成失败: {str(e)}")
@@ -874,8 +875,10 @@ class analyze_lyrics:
             print(f"无效性别建议: {analysis['gender_suggestion']}，应为: {SINGER_GENDERS}")
 
         # 返回验证通过的结果
-        return ", ".join([analysis["emotion"], analysis["genre"], analysis["instrumentation"], analysis["timbre"],
+        result = ", ".join([analysis["emotion"], analysis["genre"], analysis["instrumentation"], analysis["timbre"],
                    analysis["gender_suggestion"]])
+        print(result)
+        return result
 
 
 
