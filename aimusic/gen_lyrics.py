@@ -722,12 +722,12 @@ class gen_lyrics:
             try:
                 completion = client.chat.completions.create(
                     model=model,
-                    messages={"messages": [{"role": "user", "content": prompt, }]}
+                    messages={"messages": [{"role": "user", "content": prompt}]}
                 )
             except:  # sometimes it fails first time to connect to server
                 completion = client.chat.completions.create(
                     model=model,
-                    messages={"messages": [{"role": "user", "content": prompt, }]}
+                    messages={"messages": [{"role": "user", "content": prompt}]}
                 )
             # Get the answer from the chat completion
             lyrics = completion.choices[0].message.content
@@ -815,12 +815,12 @@ class analyze_lyrics:
         try:
             completion = client.chat.completions.create(
                 model=model,
-                messages={"messages": [{"role": "user", "content": prompt,}]}
+                messages={"messages": [{"role": "user", "content": prompt}]}
             )
         except:  # sometimes it fails first time to connect to server
             completion = client.chat.completions.create(
                 model=model,
-                messages={"messages": [{"role": "user", "content": prompt,}]}
+                messages={"messages": [{"role": "user", "content": prompt}]}
             )
         # Get the answer from the chat completion
         content = completion.choices[0].message.content
