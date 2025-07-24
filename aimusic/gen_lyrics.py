@@ -623,8 +623,48 @@ class gen_lyrics:
     CATEGORY = "aimusic/gen-lyrics"  # 定义节点类别
     def gen_lyrics(self, client,model, Lyric_theme, Lyric_structure, time_m, time_s):
         song_length = f"{time_m}分{time_s}秒"
-        # 结构模板选择
-        template = STRUCTURE_TEMPLATES[Lyric_structure]
+        # 中文结构名到英文键的映射
+        structure_name_map = {
+            "流行基础结构": "pop_basic",
+            "流行带桥段结构": "pop_with_bridge",
+            "流行带预副歌结构": "pop_with_prechorus",
+            "流行双副歌结构": "pop_doublechorus",
+            "流行带后副歌结构": "pop_postchorus",
+            "中国民谣结构": "chinese_folk",
+            "戏曲结构": "chinese_opera",
+            "古琴曲结构": "guqin",
+            "民族融合结构": "ethnic_fusion",
+            "中国流行结构": "chinese_pop",
+            "蒙古呼麦结构": "mongolian_throat",
+            "经典摇滚结构": "rock_classic",
+            "前卫金属结构": "metal_progressive",
+            "朋克结构": "punk",
+            "硬摇滚结构": "hardrock",
+            "摇滚抒情曲结构": "rock_ballad",
+            "金属核结构": "metalcore",
+            "蓝调摇滚结构": "blues_rock",
+            "摇滚器乐曲结构": "rock_instrumental",
+            "EDM构建-高潮结构": "edm_builddrop",
+            "浩室结构": "house",
+            "回响贝斯结构": "dubstep",
+            "科技结构": "techno",
+            "鼓打贝斯结构": "drum_bass",
+            "氛围结构": "ambient",
+            "经典嘻哈结构": "hiphop_classic",
+            "陷阱结构": "trap",
+            "叙事说唱结构": "rap_storytelling",
+            "爵士嘻哈结构": "hiphop_jazzy",
+            "对战说唱结构": "rap_battle",
+            "爵士标准结构": "jazz_standard",
+            "12小节蓝调结构": "blues_12bar",
+            "爵士融合结构": "jazz_fusion",
+            "比博普结构": "bebop",
+            "爵士抒情曲结构": "jazz_ballad",
+        }
+        key = structure_name_map.get(Lyric_structure)
+        if key is None:
+            raise ValueError(f"未知的歌词结构: {Lyric_structure}")
+        template = STRUCTURE_TEMPLATES[key]
         """生成带时长控制的歌词"""
         try:
             # 解析总时长
