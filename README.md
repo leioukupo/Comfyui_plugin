@@ -6,3 +6,6 @@
 
 [willzhou](https://github.com/willzhou/MusicFayIn.git)
 
+![节点展示](./example/1.png)
+
+![和songgeneration联合](./example/2.png)
