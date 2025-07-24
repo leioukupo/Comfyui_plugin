@@ -564,7 +564,6 @@ def clean_generated_lyrics(raw_lyrics: str) -> str:
         line = line.strip()
         if not line:
             continue
-
         # Detect section headers like [verse]
         section_match = re.match(r'^\[([a-z\-]+)\]$', line)
         if section_match:
@@ -748,7 +747,7 @@ class gen_lyrics:
             # Get the answer from the chat completion
             lyrics = completion.choices[0].message.content
             if lyrics:
-                clean_generated_lyrics(lyrics)
+                lyrics = clean_generated_lyrics(lyrics)
                 return lyrics
         except Exception as e:
             print(f"歌词生成失败: {str(e)}")
