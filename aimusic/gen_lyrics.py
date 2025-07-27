@@ -560,6 +560,9 @@ def clean_generated_lyrics(raw_lyrics: str) -> str:
     current_section = None
     current_lines = []
 
+    # 需要统一替换为句号的中文标点符号
+    punctuation_to_dot = ['，', '。', '！', '？', '；', '：', '、', '「', '」', '『', '』', '（', '）', '《', '》', '——', '…', '“', '”', '‘', '’']
+
     for line in raw_lyrics.split('\n'):
         line = line.strip()
         if not line:
@@ -579,8 +582,14 @@ def clean_generated_lyrics(raw_lyrics: str) -> str:
             current_section = section_match.group(1)
             current_lines = []
         elif current_section is not None:
-            # Clean lyric line and add to current section
-            cleaned_line = line.replace(' ', '.').replace('，', '.').replace('。', '.').strip('. ')
+            # 替换所有指定中文标点为句号
+            cleaned_line = line
+            for p in punctuation_to_dot:
+                cleaned_line = cleaned_line.replace(p, '.')
+            # 替换空格为句号，去除多余句号和空格
+            cleaned_line = cleaned_line.replace(' ', '.').strip('. ')
+            # 合并连续多个句号为一个
+            cleaned_line = re.sub(r'\.+', '.', cleaned_line)
             if cleaned_line:
                 current_lines.append(cleaned_line)
     # 处理最后一个段落
