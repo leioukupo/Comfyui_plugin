@@ -626,7 +626,7 @@ class gen_lyrics:
                 "time_m": ("INT", {
                     "default": 1.0,
                     "min": 0,
-                    "max": 2,
+                    "max": 4,
                     "step": 1,
                     "round": 0.001,  # 精度
                     "display": "slider"}),  # 滑动调整  
